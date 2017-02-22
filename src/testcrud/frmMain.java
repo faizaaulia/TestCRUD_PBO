@@ -27,21 +27,249 @@ public class frmMain extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbData = new javax.swing.JTable();
+        jPanel4 = new javax.swing.JPanel();
+        btnEdit = new javax.swing.JButton();
+        btnAdd1 = new javax.swing.JButton();
+        btnDelete1 = new javax.swing.JButton();
+        Reset1 = new javax.swing.JButton();
+        btnRefresh1 = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        txtNIS = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        txtNama = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        rdPerempuan = new javax.swing.JRadioButton();
+        rdLaki1 = new javax.swing.JRadioButton();
+        jLabel7 = new javax.swing.JLabel();
+        txKelas = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        txtEmail = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        tfAlamat = new javax.swing.JTextField();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
+        setResizable(false);
+        getContentPane().setLayout(null);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        jPanel1.setBackground(new java.awt.Color(255, 0, 0));
+        jPanel1.setLayout(null);
 
-        pack();
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("The Real Informatic School");
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(10, 30, 230, 30);
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("FORM BIODATA SISWA SMK TELKOM MALANG");
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(10, 0, 490, 30);
+
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(0, 0, 710, 70);
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setLayout(null);
+
+        jPanel3.setBackground(new java.awt.Color(0, 153, 153));
+        jPanel3.setLayout(null);
+
+        tbData.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "NIS", "Nama Siswa", "Jenis Kelamin", "Kelas", "Email", "Alamat"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tbData);
+
+        jPanel3.add(jScrollPane1);
+        jScrollPane1.setBounds(10, 10, 440, 380);
+
+        jPanel2.add(jPanel3);
+        jPanel3.setBounds(230, 70, 490, 400);
+
+        jPanel4.setBackground(new java.awt.Color(0, 153, 153));
+        jPanel4.setLayout(null);
+
+        btnEdit.setText("EDIT");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
+            }
+        });
+        jPanel4.add(btnEdit);
+        btnEdit.setBounds(370, 10, 80, 30);
+
+        btnAdd1.setText("SAVE");
+        jPanel4.add(btnAdd1);
+        btnAdd1.setBounds(10, 11, 80, 30);
+
+        btnDelete1.setText("DELETE");
+        btnDelete1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDelete1ActionPerformed(evt);
+            }
+        });
+        jPanel4.add(btnDelete1);
+        btnDelete1.setBounds(100, 10, 80, 30);
+
+        Reset1.setText("CLEAR");
+        Reset1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Reset1ActionPerformed(evt);
+            }
+        });
+        jPanel4.add(Reset1);
+        Reset1.setBounds(190, 10, 80, 30);
+
+        btnRefresh1.setText("REFRESH");
+        btnRefresh1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefresh1ActionPerformed(evt);
+            }
+        });
+        jPanel4.add(btnRefresh1);
+        btnRefresh1.setBounds(280, 10, 80, 30);
+
+        jPanel2.add(jPanel4);
+        jPanel4.setBounds(230, 10, 480, 50);
+
+        jPanel5.setBackground(new java.awt.Color(0, 153, 153));
+        jPanel5.setLayout(null);
+
+        jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
+        jPanel5.add(jSeparator1);
+        jSeparator1.setBounds(0, 30, 210, 10);
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel3.setText("Isian Data Siswa");
+        jPanel5.add(jLabel3);
+        jLabel3.setBounds(10, 10, 120, 15);
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel4.setText("NIS");
+        jPanel5.add(jLabel4);
+        jLabel4.setBounds(10, 40, 21, 15);
+
+        txtNIS.setEditable(false);
+        jPanel5.add(txtNIS);
+        txtNIS.setBounds(10, 60, 190, 30);
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel5.setText("Jenis Kelamin");
+        jPanel5.add(jLabel5);
+        jLabel5.setBounds(10, 160, 120, 15);
+
+        txtNama.setEditable(false);
+        jPanel5.add(txtNama);
+        txtNama.setBounds(10, 120, 190, 30);
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel6.setText("Nama");
+        jPanel5.add(jLabel6);
+        jLabel6.setBounds(10, 100, 60, 15);
+
+        rdPerempuan.setText("Perempuan");
+        rdPerempuan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdPerempuanActionPerformed(evt);
+            }
+        });
+        jPanel5.add(rdPerempuan);
+        rdPerempuan.setBounds(100, 180, 90, 23);
+
+        rdLaki1.setText("Laki-Laki");
+        rdLaki1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdLaki1ActionPerformed(evt);
+            }
+        });
+        jPanel5.add(rdLaki1);
+        rdLaki1.setBounds(10, 180, 80, 23);
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel7.setText("Kelas");
+        jPanel5.add(jLabel7);
+        jLabel7.setBounds(10, 210, 60, 15);
+
+        txKelas.setEditable(false);
+        jPanel5.add(txKelas);
+        txKelas.setBounds(10, 230, 190, 30);
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel8.setText("Alamat");
+        jPanel5.add(jLabel8);
+        jLabel8.setBounds(10, 330, 60, 15);
+
+        txtEmail.setEditable(false);
+        jPanel5.add(txtEmail);
+        txtEmail.setBounds(10, 290, 190, 30);
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel9.setText("Email");
+        jPanel5.add(jLabel9);
+        jLabel9.setBounds(10, 270, 60, 15);
+        jPanel5.add(tfAlamat);
+        tfAlamat.setBounds(10, 350, 190, 100);
+
+        jPanel2.add(jPanel5);
+        jPanel5.setBounds(10, 10, 210, 460);
+
+        getContentPane().add(jPanel2);
+        jPanel2.setBounds(0, 70, 700, 470);
+
+        setSize(new java.awt.Dimension(705, 574));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEditActionPerformed
+
+    private void btnDelete1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelete1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDelete1ActionPerformed
+
+    private void Reset1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Reset1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Reset1ActionPerformed
+
+    private void btnRefresh1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefresh1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRefresh1ActionPerformed
+
+    private void rdPerempuanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdPerempuanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rdPerempuanActionPerformed
+
+    private void rdLaki1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdLaki1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rdLaki1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +307,34 @@ public class frmMain extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Reset1;
+    private javax.swing.JButton btnAdd1;
+    private javax.swing.JButton btnDelete1;
+    private javax.swing.JButton btnEdit;
+    private javax.swing.JButton btnRefresh1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JRadioButton rdLaki1;
+    private javax.swing.JRadioButton rdPerempuan;
+    private javax.swing.JTable tbData;
+    private javax.swing.JTextField tfAlamat;
+    private javax.swing.JTextField txKelas;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtNIS;
+    private javax.swing.JTextField txtNama;
     // End of variables declaration//GEN-END:variables
 }
