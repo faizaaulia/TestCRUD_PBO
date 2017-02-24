@@ -5,6 +5,13 @@
  */
 package testcrud;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author faizaaulia
@@ -27,6 +34,7 @@ public class frmMain extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -37,7 +45,7 @@ public class frmMain extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         btnEdit = new javax.swing.JButton();
         btnAdd1 = new javax.swing.JButton();
-        btnDelete1 = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
         Reset1 = new javax.swing.JButton();
         btnRefresh1 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
@@ -49,13 +57,13 @@ public class frmMain extends javax.swing.JFrame {
         txtNama = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         rdPerempuan = new javax.swing.JRadioButton();
-        rdLaki1 = new javax.swing.JRadioButton();
+        rdLaki = new javax.swing.JRadioButton();
         jLabel7 = new javax.swing.JLabel();
-        txKelas = new javax.swing.JTextField();
+        txtKelas = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        tfAlamat = new javax.swing.JTextField();
+        txtAlamat = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -69,16 +77,16 @@ public class frmMain extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("The Real Informatic School");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(10, 30, 230, 30);
+        jLabel1.setBounds(10, 30, 360, 30);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("FORM BIODATA SISWA SMK TELKOM MALANG");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(10, 0, 490, 30);
+        jLabel2.setBounds(10, 0, 620, 30);
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 710, 70);
+        jPanel1.setBounds(0, 0, 800, 70);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(null);
@@ -108,10 +116,10 @@ public class frmMain extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tbData);
 
         jPanel3.add(jScrollPane1);
-        jScrollPane1.setBounds(10, 10, 440, 380);
+        jScrollPane1.setBounds(10, 10, 560, 380);
 
         jPanel2.add(jPanel3);
-        jPanel3.setBounds(230, 70, 490, 400);
+        jPanel3.setBounds(230, 70, 570, 400);
 
         jPanel4.setBackground(new java.awt.Color(0, 153, 153));
         jPanel4.setLayout(null);
@@ -123,20 +131,25 @@ public class frmMain extends javax.swing.JFrame {
             }
         });
         jPanel4.add(btnEdit);
-        btnEdit.setBounds(370, 10, 80, 30);
+        btnEdit.setBounds(450, 10, 90, 30);
 
         btnAdd1.setText("SAVE");
-        jPanel4.add(btnAdd1);
-        btnAdd1.setBounds(10, 11, 80, 30);
-
-        btnDelete1.setText("DELETE");
-        btnDelete1.addActionListener(new java.awt.event.ActionListener() {
+        btnAdd1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDelete1ActionPerformed(evt);
+                btnAdd1ActionPerformed(evt);
             }
         });
-        jPanel4.add(btnDelete1);
-        btnDelete1.setBounds(100, 10, 80, 30);
+        jPanel4.add(btnAdd1);
+        btnAdd1.setBounds(10, 11, 90, 30);
+
+        btnDelete.setText("DELETE");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+        jPanel4.add(btnDelete);
+        btnDelete.setBounds(340, 10, 90, 30);
 
         Reset1.setText("CLEAR");
         Reset1.addActionListener(new java.awt.event.ActionListener() {
@@ -145,7 +158,7 @@ public class frmMain extends javax.swing.JFrame {
             }
         });
         jPanel4.add(Reset1);
-        Reset1.setBounds(190, 10, 80, 30);
+        Reset1.setBounds(120, 10, 90, 30);
 
         btnRefresh1.setText("REFRESH");
         btnRefresh1.addActionListener(new java.awt.event.ActionListener() {
@@ -154,10 +167,10 @@ public class frmMain extends javax.swing.JFrame {
             }
         });
         jPanel4.add(btnRefresh1);
-        btnRefresh1.setBounds(280, 10, 80, 30);
+        btnRefresh1.setBounds(230, 10, 90, 30);
 
         jPanel2.add(jPanel4);
-        jPanel4.setBounds(230, 10, 480, 50);
+        jPanel4.setBounds(230, 10, 570, 50);
 
         jPanel5.setBackground(new java.awt.Color(0, 153, 153));
         jPanel5.setLayout(null);
@@ -174,7 +187,7 @@ public class frmMain extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setText("NIS");
         jPanel5.add(jLabel4);
-        jLabel4.setBounds(10, 40, 21, 15);
+        jLabel4.setBounds(10, 40, 23, 15);
 
         txtNIS.setEditable(false);
         jPanel5.add(txtNIS);
@@ -201,25 +214,25 @@ public class frmMain extends javax.swing.JFrame {
             }
         });
         jPanel5.add(rdPerempuan);
-        rdPerempuan.setBounds(100, 180, 90, 23);
+        rdPerempuan.setBounds(100, 180, 90, 24);
 
-        rdLaki1.setText("Laki-Laki");
-        rdLaki1.addActionListener(new java.awt.event.ActionListener() {
+        rdLaki.setText("Laki-Laki");
+        rdLaki.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdLaki1ActionPerformed(evt);
+                rdLakiActionPerformed(evt);
             }
         });
-        jPanel5.add(rdLaki1);
-        rdLaki1.setBounds(10, 180, 80, 23);
+        jPanel5.add(rdLaki);
+        rdLaki.setBounds(10, 180, 80, 24);
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel7.setText("Kelas");
         jPanel5.add(jLabel7);
         jLabel7.setBounds(10, 210, 60, 15);
 
-        txKelas.setEditable(false);
-        jPanel5.add(txKelas);
-        txKelas.setBounds(10, 230, 190, 30);
+        txtKelas.setEditable(false);
+        jPanel5.add(txtKelas);
+        txtKelas.setBounds(10, 230, 190, 30);
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel8.setText("Alamat");
@@ -234,16 +247,16 @@ public class frmMain extends javax.swing.JFrame {
         jLabel9.setText("Email");
         jPanel5.add(jLabel9);
         jLabel9.setBounds(10, 270, 60, 15);
-        jPanel5.add(tfAlamat);
-        tfAlamat.setBounds(10, 350, 190, 100);
+        jPanel5.add(txtAlamat);
+        txtAlamat.setBounds(10, 350, 190, 100);
 
         jPanel2.add(jPanel5);
-        jPanel5.setBounds(10, 10, 210, 460);
+        jPanel5.setBounds(0, 10, 220, 460);
 
         getContentPane().add(jPanel2);
-        jPanel2.setBounds(0, 70, 700, 470);
+        jPanel2.setBounds(0, 70, 800, 470);
 
-        setSize(new java.awt.Dimension(705, 574));
+        setSize(new java.awt.Dimension(806, 564));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -251,25 +264,71 @@ public class frmMain extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnEditActionPerformed
 
-    private void btnDelete1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelete1ActionPerformed
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnDelete1ActionPerformed
+        int baris = tbData.getSelectedRow();
+        if(baris != 1) {
+            String NIS = tbData.getValueAt(baris,0).toString();
+            String SQL = "DELETE FROM t_siswa WHERE NIS='"+NIS+"'";
+            int status = KoneksiDB.execute(SQL);
+            if(status==1) {
+                JOptionPane.showMessageDialog(this, "Data berhasil dihapus", "Sukses", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "Data gagal dihapus", "Gagal", JOptionPane.WARNING_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Pilih Baris Data Terlebih Dahulu!", "Error", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void Reset1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Reset1ActionPerformed
         // TODO add your handling code here:
+        txtNama.setText("");
+        txtNIS.setText("");
+        txtKelas.setText("");
+        buttonGroup1.clearSelection();
+        txtAlamat.setText("");
+        txtEmail.setText("");
+        
     }//GEN-LAST:event_Reset1ActionPerformed
 
     private void btnRefresh1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefresh1ActionPerformed
         // TODO add your handling code here:
+        selectData();
     }//GEN-LAST:event_btnRefresh1ActionPerformed
 
     private void rdPerempuanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdPerempuanActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_rdPerempuanActionPerformed
 
-    private void rdLaki1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdLaki1ActionPerformed
+    private void rdLakiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdLakiActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_rdLaki1ActionPerformed
+    }//GEN-LAST:event_rdLakiActionPerformed
+
+    private void btnAdd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdd1ActionPerformed
+        // TODO add your handling code here:
+        if("".equals(txtNIS.getText()) || "".equals(txtAlamat.getText()) || 
+            "".equals(txtKelas.getText()) || "".equals(txtNama.getText()) || "".equals(txtEmail.getText())) {
+            JOptionPane.showMessageDialog(this, "Harap Lengkapi Data!", "Error", JOptionPane.WARNING_MESSAGE);
+        } else {
+            String JK = "";
+            if(rdLaki.isSelected()) {
+                JK = "L";
+            } else {
+                JK = "P";
+            }
+            String SQL = "INSERT INTO t_siswa (NIS,NamaSiswa,JenisKelamin,Kelas,Email,Alamat) "
+                    + "VALUES('"+txtNIS.getText()+"','"+txtNama.getText()+"','"+JK+"',"
+                    + "'"+txtKelas.getText()+"','"+txtEmail.getText()+"','"+txtAlamat.getText()+"')";
+            int status = KoneksiDB.execute(SQL);
+            if(status == 1) {
+                JOptionPane.showMessageDialog(this, "Data berhasil ditambahkan", "Sukses", JOptionPane.INFORMATION_MESSAGE);
+                selectData();
+            } else {
+                JOptionPane.showMessageDialog(this, "Data gagal ditambahkan", "Sukses", JOptionPane.WARNING_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_btnAdd1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -309,9 +368,10 @@ public class frmMain extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Reset1;
     private javax.swing.JButton btnAdd1;
-    private javax.swing.JButton btnDelete1;
+    private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnRefresh1;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -328,13 +388,40 @@ public class frmMain extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JRadioButton rdLaki1;
+    private javax.swing.JRadioButton rdLaki;
     private javax.swing.JRadioButton rdPerempuan;
     private javax.swing.JTable tbData;
-    private javax.swing.JTextField tfAlamat;
-    private javax.swing.JTextField txKelas;
+    private javax.swing.JTextField txtAlamat;
     private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtKelas;
     private javax.swing.JTextField txtNIS;
     private javax.swing.JTextField txtNama;
     // End of variables declaration//GEN-END:variables
+
+    private void selectData() {
+        String kolom[] = {"NIS","NamaSiswa","JenisKelamin","Kelas","Email","Alamat"};
+        DefaultTableModel dtm = new DefaultTableModel(null, kolom);
+        String SQL = "SELECT * FROM t_siswa";
+        ResultSet rs = KoneksiDB.executeQuery(SQL);
+        try {
+            while(rs.next()){
+                String NIS = rs.getString(1);
+                String NamaSiswa = rs.getString(2);
+                String JenisKelamin = "";
+                if("L".equals(rs.getString(3))){
+                    JenisKelamin = "Laki-laki";
+                }else{
+                    JenisKelamin = "Perempuan";
+                }
+                String Kelas = rs.getString(4);
+                String Email = rs.getString(5);
+                String Alamat = rs.getString(6);
+                String data[] = {NIS,NamaSiswa,JenisKelamin,Kelas,Email,Alamat};
+                dtm.addRow(data);
+            }
+        }catch(SQLException ex){
+            Logger.getLogger(frmMain.class.getName()).log(Level.SEVERE, null,ex);
+        }
+        tbData.setModel(dtm);
+    }
 }
