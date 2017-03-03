@@ -56,14 +56,15 @@ public class frmMain extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         txtNama = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        rdPerempuan = new javax.swing.JRadioButton();
-        rdLaki = new javax.swing.JRadioButton();
         jLabel7 = new javax.swing.JLabel();
         txtKelas = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        txtAlamat = new javax.swing.JTextField();
+        rdPerempuan = new javax.swing.JRadioButton();
+        rdLaki = new javax.swing.JRadioButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtAlamat = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -111,6 +112,11 @@ public class frmMain extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tbData.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbDataMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tbData);
@@ -187,68 +193,59 @@ public class frmMain extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setText("NIS");
         jPanel5.add(jLabel4);
-        jLabel4.setBounds(10, 40, 23, 15);
-
-        txtNIS.setEditable(false);
+        jLabel4.setBounds(10, 40, 21, 15);
         jPanel5.add(txtNIS);
-        txtNIS.setBounds(10, 60, 190, 30);
+        txtNIS.setBounds(10, 60, 200, 30);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setText("Jenis Kelamin");
         jPanel5.add(jLabel5);
         jLabel5.setBounds(10, 160, 120, 15);
-
-        txtNama.setEditable(false);
         jPanel5.add(txtNama);
-        txtNama.setBounds(10, 120, 190, 30);
+        txtNama.setBounds(10, 120, 200, 30);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setText("Nama");
         jPanel5.add(jLabel6);
         jLabel6.setBounds(10, 100, 60, 15);
 
-        rdPerempuan.setText("Perempuan");
-        rdPerempuan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdPerempuanActionPerformed(evt);
-            }
-        });
-        jPanel5.add(rdPerempuan);
-        rdPerempuan.setBounds(100, 180, 90, 24);
-
-        rdLaki.setText("Laki-Laki");
-        rdLaki.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdLakiActionPerformed(evt);
-            }
-        });
-        jPanel5.add(rdLaki);
-        rdLaki.setBounds(10, 180, 80, 24);
-
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel7.setText("Kelas");
         jPanel5.add(jLabel7);
         jLabel7.setBounds(10, 210, 60, 15);
-
-        txtKelas.setEditable(false);
         jPanel5.add(txtKelas);
-        txtKelas.setBounds(10, 230, 190, 30);
+        txtKelas.setBounds(10, 230, 200, 30);
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel8.setText("Alamat");
         jPanel5.add(jLabel8);
         jLabel8.setBounds(10, 330, 60, 15);
-
-        txtEmail.setEditable(false);
         jPanel5.add(txtEmail);
-        txtEmail.setBounds(10, 290, 190, 30);
+        txtEmail.setBounds(10, 290, 200, 30);
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel9.setText("Email");
         jPanel5.add(jLabel9);
         jLabel9.setBounds(10, 270, 60, 15);
-        jPanel5.add(txtAlamat);
-        txtAlamat.setBounds(10, 350, 190, 100);
+
+        buttonGroup1.add(rdPerempuan);
+        rdPerempuan.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        rdPerempuan.setText("Perempuan");
+        jPanel5.add(rdPerempuan);
+        rdPerempuan.setBounds(100, 180, 87, 23);
+
+        buttonGroup1.add(rdLaki);
+        rdLaki.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        rdLaki.setText("Laki-laki");
+        jPanel5.add(rdLaki);
+        rdLaki.setBounds(10, 180, 65, 23);
+
+        txtAlamat.setColumns(20);
+        txtAlamat.setRows(5);
+        jScrollPane2.setViewportView(txtAlamat);
+
+        jPanel5.add(jScrollPane2);
+        jScrollPane2.setBounds(10, 350, 200, 90);
 
         jPanel2.add(jPanel5);
         jPanel5.setBounds(0, 10, 220, 460);
@@ -262,12 +259,38 @@ public class frmMain extends javax.swing.JFrame {
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         // TODO add your handling code here:
+        if("".equals(txtNIS.getText()) || "".equals(txtNama.getText()) || 
+                "".equals(txtKelas.getText()) || "".equals(txtEmail.getText()) ||
+                "".equals(txtAlamat.getText())){
+            JOptionPane.showMessageDialog(this, "Harap lengkapi data","Error", JOptionPane.WARNING_MESSAGE);
+        }else{
+            String JK = "";
+            if(rdLaki.isSelected())
+                JK = "L";
+            else
+                JK = "P";
+            
+            String SQL = "UPDATE t_siswa SET "
+                + "NamaSiswa='"+txtNama.getText()+"', JenisKelamin='"+JK+"', "
+                +"Kelas='"+txtKelas.getText()+"', "
+                +"Email='"+txtEmail.getText()+"', "
+                +"Alamat='"+txtAlamat.getText()+"' " 
+                +"WHERE NIS='"+txtNIS.getText()+"'";
+            
+            int status = KoneksiDB.execute(SQL);
+            if(status == 1){
+                JOptionPane.showMessageDialog(this, "Data berhasil diupdate","Sukses", JOptionPane.INFORMATION_MESSAGE);
+                    selectData();                
+            }else{
+                JOptionPane.showMessageDialog(this, "Data gagal diupdate","Gagal", JOptionPane.WARNING_MESSAGE);
+            }
+        }
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
         int baris = tbData.getSelectedRow();
-        if(baris != 1) {
+        if(baris != -1) {
             String NIS = tbData.getValueAt(baris,0).toString();
             String SQL = "DELETE FROM t_siswa WHERE NIS='"+NIS+"'";
             int status = KoneksiDB.execute(SQL);
@@ -297,14 +320,6 @@ public class frmMain extends javax.swing.JFrame {
         selectData();
     }//GEN-LAST:event_btnRefresh1ActionPerformed
 
-    private void rdPerempuanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdPerempuanActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rdPerempuanActionPerformed
-
-    private void rdLakiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdLakiActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rdLakiActionPerformed
-
     private void btnAdd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdd1ActionPerformed
         // TODO add your handling code here:
         if("".equals(txtNIS.getText()) || "".equals(txtAlamat.getText()) || 
@@ -329,6 +344,23 @@ public class frmMain extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnAdd1ActionPerformed
+
+    private void tbDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDataMouseClicked
+        // TODO add your handling code here:
+        int baris = tbData.getSelectedRow();
+        if(baris != -1) {
+            txtNIS.setText(tbData.getValueAt(baris,0).toString());
+            txtNama.setText(tbData.getValueAt(baris,1).toString());
+            if("Laki-laki".equals(tbData.getValueAt(baris,2).toString())) {
+                rdLaki.setSelected(true);
+            } else {
+                rdPerempuan.setSelected(true);
+            }
+            txtKelas.setText(tbData.getValueAt(baris,3).toString());
+            txtEmail.setText(tbData.getValueAt(baris,4).toString());
+            txtAlamat.setText(tbData.getValueAt(baris,5).toString());
+        }
+    }//GEN-LAST:event_tbDataMouseClicked
 
     /**
      * @param args the command line arguments
@@ -387,11 +419,12 @@ public class frmMain extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JRadioButton rdLaki;
     private javax.swing.JRadioButton rdPerempuan;
     private javax.swing.JTable tbData;
-    private javax.swing.JTextField txtAlamat;
+    private javax.swing.JTextArea txtAlamat;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtKelas;
     private javax.swing.JTextField txtNIS;

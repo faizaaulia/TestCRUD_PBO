@@ -46,6 +46,7 @@ public class Login extends javax.swing.JFrame {
         txtpass = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
@@ -70,6 +71,11 @@ public class Login extends javax.swing.JFrame {
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, -1, -1));
 
         jButton2.setText("Exit");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 280, -1, -1));
 
         jButton3.setText("SignIn");
@@ -79,6 +85,8 @@ public class Login extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 280, -1, -1));
+
+        txtpass.setEchoChar('#');
         getContentPane().add(txtpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 210, 260, 40));
 
         setSize(new java.awt.Dimension(422, 375));
@@ -122,6 +130,11 @@ public class Login extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Gagal !");
         }
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
